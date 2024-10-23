@@ -157,6 +157,7 @@ Authorization: Bearer <jwt_token>
 - **Add a product to the cart**
 
   - **POST** `/api/cart/:userId`
+  - **Headers**: `Authorization: Bearer <jwt_token>`
   - **Request body**:
     ```json
     {
@@ -164,7 +165,6 @@ Authorization: Bearer <jwt_token>
       "quantity": 1
     }
     ```
-  - **Headers**: `Authorization: Bearer <jwt_token>`
 
 - **Remove a product from the cart**
 
@@ -172,7 +172,7 @@ Authorization: Bearer <jwt_token>
   - **Headers**: `Authorization: Bearer <jwt_token>`
 
 - **Increase or decrease product quantity in the cart**
-  - **PUT** `/api/cart/:userId`
+  - **PATCH** `/api/cart/:userId/<increase><decrease>`
   - **Headers**: `Authorization: Bearer <jwt_token>`
   - **Request body**:
     ```json

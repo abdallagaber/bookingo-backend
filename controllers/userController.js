@@ -25,6 +25,7 @@ exports.registerUser = async (req, res) => {
       { expiresIn: "30d" }
     );
 
+    user.password = undefined;
     res.status(201).json({ user, token });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -51,6 +52,7 @@ exports.loginUser = async (req, res) => {
       { expiresIn: "30d" }
     );
 
+    user.password = undefined;
     res.json({ user, token });
   } catch (error) {
     res.status(500).json({ message: error.message });

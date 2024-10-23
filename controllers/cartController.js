@@ -41,7 +41,7 @@ const addToCart = async (req, res) => {
     }
 
     await cart.save();
-    res.status(201).json({ message: "Product added to cart" });
+    res.status(201).json({ cart, message: "Product added to cart" });
   } catch (error) {
     res
       .status(500)
@@ -79,7 +79,7 @@ const decreaseQuantity = async (req, res) => {
     }
 
     await cart.save();
-    res.status(200).json({ message: "Product quantity decreased" });
+    res.status(200).json({ cart, message: "Product quantity decreased" });
   } catch (error) {
     res
       .status(500)
@@ -111,7 +111,7 @@ const increaseQuantity = async (req, res) => {
     existingProduct.quantity += 1;
 
     await cart.save();
-    res.status(200).json({ message: "Product quantity increased" });
+    res.status(200).json({ cart, message: "Product quantity increased" });
   } catch (error) {
     res
       .status(500)
@@ -132,7 +132,7 @@ const removeFromCart = async (req, res) => {
       (item) => item.productId.toString() !== productId
     );
     await cart.save();
-    res.json({ message: "Product removed from cart" });
+    res.json({ cart, message: "Product removed from cart" });
   } catch (error) {
     res
       .status(500)
