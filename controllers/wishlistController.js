@@ -30,7 +30,7 @@ const addToWishlist = async (req, res) => {
     }
 
     const existingProduct = wishlist.products.find(
-      (item) => item.productId.toString() === productId
+      (item) => item._id.toString() === productId
     );
     if (existingProduct) {
       return res.status(400).json({ message: "Product already in wishlist" });
@@ -57,7 +57,7 @@ const removeFromWishlist = async (req, res) => {
     }
 
     wishlist.products = wishlist.products.filter(
-      (item) => item.productId.toString() !== productId
+      (item) => item._id.toString() !== productId
     );
     await wishlist.save();
 
