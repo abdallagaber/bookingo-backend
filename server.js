@@ -28,9 +28,27 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: `http://localhost:${process.env.PORT || 5000}`,
-        description: "Development server",
+        url:
+          process.env.NODE_ENV === "production"
+            ? process.env.PRODUCTION_URL || "http://localhost:5000"
+            : `http://localhost:${process.env.PORT || 5000}`,
+        description:
+          process.env.NODE_ENV === "production"
+            ? "Production server"
+            : "Development server",
       },
+      {
+        url: `http://localhost:${process.env.PORT || 5000}`,
+        description: "Local development server",
+      },
+      ...(process.env.PRODUCTION_URL
+        ? [
+            {
+              url: process.env.PRODUCTION_URL,
+              description: "Production server",
+            },
+          ]
+        : []),
     ],
     components: {
       securitySchemes: {
@@ -80,7 +98,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
  *                   example: "1.0.0"
  *                 documentation:
  *                   type: string
- *                   example: "http://localhost:5000/api-docs"
+ *                   example: "https://your-api-domain.com/api-docs"
  *                 endpoints:
  *                   type: object
  *                   properties:
